@@ -13,6 +13,5 @@ namespace PhoneUserKICB.PL.Models.ViewModels
         [Required]
         public int UserId { get; set; }
 
-        public string UserName { get; set; }
     }
 }

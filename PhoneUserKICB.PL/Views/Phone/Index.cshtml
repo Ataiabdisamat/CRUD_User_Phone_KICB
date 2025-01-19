@@ -1,0 +1,27 @@
+﻿@using PhoneUserKICB.PL.Models.ViewModels;
+@model IEnumerable<PhoneViewModel>
+
+<h1>Phones</h1>
+<a asp-action="Create">Add New Phone</a>
+<table>
+    <thead>
+        <tr>
+            <th>Phone Number</th>
+            <th>User</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var phone in Model)
+        {
+            <tr>
+                <td>@phone.PhoneNumber</td>
+                <td>@phone.UserName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@phone.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@phone.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

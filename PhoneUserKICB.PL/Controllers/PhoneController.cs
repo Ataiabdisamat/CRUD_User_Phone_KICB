@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhoneUserKICB.BLL.DTO;
 using PhoneUserKICB.BLL.Interfaces;
+using PhoneUserKICB.DAL.Entities;
 using PhoneUserKICB.PL.Models.ViewModels;
 
 namespace PhoneUserKICB.PL.Controllers
@@ -18,16 +19,41 @@ namespace PhoneUserKICB.PL.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
+            int pageSize = 5; // Количество элементов на странице
+
+            // Получаем все телефоны
             var phones = await _phoneService.GetAllPhonesAsync();
-            var viewModel = phones.Select(phone => new PhoneViewModel
+
+            // Получаем общее количество телефонов
+            var totalPhones = phones.Count();
+
+            // Пагинация
+            var phonesPaged = phones.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            // Создаём ViewModel с телефонами и пагинацией
+            var viewModel = new List<PhoneViewModel>();
+            foreach (var phone in phonesPaged)
             {
-                Id = phone.Id,
-                PhoneNumber = phone.PhoneNumber,
-                UserId = phone.UserId
+                var user = await _userService.GetUserByIdAsync(phone.UserId);
+                viewModel.Add(new PhoneViewModel
+                {
+                    Id = phone.Id,
+                    PhoneNumber = phone.PhoneNumber,
+                    UserId = phone.UserId,
+                    UserName = user.Name,
+                    UserEmail = user.Email
+                });
+            }
+
+            // Возвращаем View с необходимыми данными
+            return View(new PhoneListViewModel
+            {
+                Phones = viewModel,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalPhones / (double)pageSize)
             });
-            return View(viewModel);
         }
 
         [HttpGet("create")]

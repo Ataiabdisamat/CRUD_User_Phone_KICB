@@ -1,0 +1,19 @@
+﻿@model PhoneUserKICB.PL.Models.ViewModels.PhoneViewModel
+
+@{
+    ViewData["Title"] = "Delete Phone";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Are you sure you want to delete this phone?</h3>
+
+<div>
+    <b>Phone Number:</b> @Model.PhoneNumber
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="@Url.Action("Index", "Phone")" class="btn btn-secondary">Cancel</a>
+</form>

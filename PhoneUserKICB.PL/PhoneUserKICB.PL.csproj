@@ -21,4 +21,8 @@
     <ProjectReference Include="..\PhoneUserKICB.DAL\PhoneUserKICB.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>

@@ -1,10 +1,14 @@
 ﻿@model PhoneUserKICB.PL.Models.ViewModels.PhoneViewModel
 
-<h2>Phone Details</h2>
+<div class="container py-5">
+    <h2 class="text-center text-primary fw-bold mb-4">Phone Details</h2>
 
-<div>
-    <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
-    <p><strong>Associated User:</strong> @ViewBag.UserName</p>
+    <div class="mb-4">
+        <p><strong class="text-primary fs-4">Phone Number:</strong> @Model.PhoneNumber</p>
+        <p><strong class="text-primary fs-4">Associated User:</strong> @ViewBag.UserName</p>
+    </div>
+
+    <div class="text-center">
+        <a href="@Url.Action("Index")" class="btn btn-secondary btn-lg fw-bold">Back to list</a>
+    </div>
 </div>
-
-<a href="@Url.Action("Index")">Back to list</a>

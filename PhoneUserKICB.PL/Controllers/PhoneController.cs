@@ -21,18 +21,14 @@ namespace PhoneUserKICB.PL.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int page = 1)
         {
-            int pageSize = 5; // Количество элементов на странице
+            int pageSize = 5; 
 
-            // Получаем все телефоны
             var phones = await _phoneService.GetAllPhonesAsync();
 
-            // Получаем общее количество телефонов
             var totalPhones = phones.Count();
 
-            // Пагинация
             var phonesPaged = phones.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
-            // Создаём ViewModel с телефонами и пагинацией
             var viewModel = new List<PhoneViewModel>();
             foreach (var phone in phonesPaged)
             {
@@ -47,7 +43,6 @@ namespace PhoneUserKICB.PL.Controllers
                 });
             }
 
-            // Возвращаем View с необходимыми данными
             return View(new PhoneListViewModel
             {
                 Phones = viewModel,

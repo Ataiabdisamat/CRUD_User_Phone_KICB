@@ -12,7 +12,7 @@ namespace PhoneUserKICB.BLL.Validations
         public static bool IsValid(string phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber)) return false;
-            var regex = new Regex(@"^\+?\d{10,15}$"); //TODO
+            var regex = new Regex(@"^\+?\d{10,14}$"); //TODO
             return regex.IsMatch(phoneNumber);
         }
     }

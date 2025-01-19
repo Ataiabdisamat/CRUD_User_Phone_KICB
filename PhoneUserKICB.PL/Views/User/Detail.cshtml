@@ -1,9 +1,19 @@
 ﻿@model PhoneUserKICB.PL.Models.ViewModels.UserViewModel
 
-<h2>User Details</h2>
+<div class="container py-5">
+    <h2 class="text-center text-primary fw-bold mb-4">User Details</h2>
 
-<p><strong>Name:</strong> @Model.Name</p>
-<p><strong>Email:</strong> @Model.Email</p>
-<p><strong>Date of Birth:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+    <div class="fs-4 mb-3">
+        <strong class="text-primary">Name:</strong> @Model.Name
+    </div>
+    <div class="fs-4 mb-3">
+        <strong class="text-primary">Email:</strong> @Model.Email
+    </div>
+    <div class="fs-4 mb-3">
+        <strong class="text-primary">Date of Birth:</strong> @Model.DateOfBirth.ToShortDateString()
+    </div>
 
-<a href="@Url.Action("Index")">Back to list</a>
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index")" class="btn btn-secondary btn-lg fw-bold">Back to list</a>
+    </div>
+</div>

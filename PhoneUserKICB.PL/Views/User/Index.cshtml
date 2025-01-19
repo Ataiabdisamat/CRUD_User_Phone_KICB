@@ -1,22 +1,25 @@
 ﻿@model PhoneUserKICB.PL.Models.ViewModels.UserListViewModel
 
-<h2>Список пользователей</h2>
-
+<h2>Users</h2>
 
 <form method="get" action="@Url.Action("Index")" class="mb-3">
     <div class="input-group">
-        <input type="text" name="searchTerm" class="form-control" value="@Model.SearchTerm" placeholder="Введите имя или email">
-        <button type="submit" class="btn btn-primary">Поиск</button>
+        <input type="text" name="searchTerm" class="form-control" value="@Model.SearchTerm" placeholder="name or email search">
+        <button type="submit" class="btn btn-primary">search</button>
     </div>
 </form>
 
-<table class="table">
-    <thead>
+<div class="text-end mb-3">
+    <a asp-action="Create" class="btn btn-success btn-lg fw-bold">Create User</a>
+</div>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="table-light">
         <tr>
-            <th>Имя</th>
+            <th>Name</th>
             <th>Email</th>
-            <th>Дата рождения</th>
-            <th>Действия</th>
+            <th>Date of birth</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -26,18 +29,16 @@
                 <td>@user.Name</td>
                 <td>@user.Email</td>
                 <td>@user.DateOfBirth.ToShortDateString()</td>
-                
                 <td>
-                    <a asp-action="Detail" asp-route-id="@user.Id">Detail</a> |
-                    <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
-                
+                    <a class="btn btn-info btn-sm fw-bold" asp-action="Detail" asp-route-id="@user.Id">Detail</a>
+                    <a class="btn btn-warning btn-sm fw-bold" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
+                    <a class="btn btn-danger btn-sm fw-bold" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<a asp-action="Create">Add New User</a>
+
 <nav>
     <ul class="pagination">
         @if (Model.CurrentPage > 1)
@@ -62,4 +63,3 @@
         }
     </ul>
 </nav>
-

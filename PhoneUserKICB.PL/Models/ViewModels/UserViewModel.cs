@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PhoneUserKICB.PL.Models.ViewModels
 {
+
+    /// <summary>
+    /// View model for user
+    /// </summary>
     public class UserViewModel
     {
         public int Id { get; set; }

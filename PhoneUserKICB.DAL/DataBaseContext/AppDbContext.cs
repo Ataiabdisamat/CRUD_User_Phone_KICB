@@ -4,6 +4,9 @@ using PhoneUserKICB.DAL.EntityConfigurations;
 
 namespace PhoneUserKICB.DAL.DataBaseContext
 {
+    /// <summary>
+    /// Контекст Базы данных
+    /// </summary>
     public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }

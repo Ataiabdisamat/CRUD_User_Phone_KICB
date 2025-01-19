@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PhoneUserKICB.BLL.Validations
 {
+    /// <summary>
+    /// Validator for phone
+    /// </summary>
     public static class PhoneNumberValidation
     {
         public static bool IsValid(string phoneNumber)

@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PhoneUserKICB.DAL.Entities;
-
 namespace PhoneUserKICB.DAL.EntityConfigurations;
+/// <summary>
+/// Configuration for Phone db   
+/// </summary>
 public class PhoneConfiguration : IEntityTypeConfiguration<Phone>
 {
     public void Configure(EntityTypeBuilder<Phone> builder)

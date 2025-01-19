@@ -6,7 +6,10 @@ using PhoneUserKICB.PL.Models.ViewModels;
 
 namespace PhoneUserKICB.PL.Controllers
 {
-    [Route("phone")]
+    /// <summary>
+    /// Controller for phone
+    /// </summary>
+    [Route("Phone")]
     public class PhoneController : Controller
     {
         private readonly IPhoneService _phoneService;
@@ -51,7 +54,7 @@ namespace PhoneUserKICB.PL.Controllers
             });
         }
 
-        [HttpGet("create")]
+        [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
             var users = await _userService.GetAllUsersAsync();
@@ -59,7 +62,7 @@ namespace PhoneUserKICB.PL.Controllers
             return View(new PhoneViewModel());
         }
 
-        [HttpPost("create")]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PhoneViewModel model)
         {
@@ -78,7 +81,7 @@ namespace PhoneUserKICB.PL.Controllers
             return View(model);
         }
 
-        [HttpGet("edit/{id}")]
+        [HttpGet("Edit/{id}")]
         public async Task<IActionResult> Edit(int id)
         {
             var phone = await _phoneService.GetPhoneByIdAsync(id);
@@ -96,7 +99,7 @@ namespace PhoneUserKICB.PL.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("edit/{id}")]
+        [HttpPost("Edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PhoneViewModel model)
         {
@@ -116,7 +119,7 @@ namespace PhoneUserKICB.PL.Controllers
             return View(model);
         }
 
-        [HttpGet("delete/{id}")]
+        [HttpGet("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var phone = await _phoneService.GetPhoneByIdAsync(id);
@@ -130,7 +133,7 @@ namespace PhoneUserKICB.PL.Controllers
             });
         }
 
-        [HttpGet("detail/{id}")]
+        [HttpGet("Detail/{id}")]
         public async Task<IActionResult> Detail(int id)
         {
             var phone = await _phoneService.GetPhoneByIdAsync(id);
@@ -146,14 +149,14 @@ namespace PhoneUserKICB.PL.Controllers
                 UserId = phone.UserId
             };
 
-            // Можно добавить информацию о пользователе, если нужно
+            
             var user = await _userService.GetUserByIdAsync(phone.UserId);
             ViewBag.UserName = user?.Name;
 
             return View(phoneViewModel);
         }
 
-        [HttpPost("delete/{id}")]
+        [HttpPost("Delete/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

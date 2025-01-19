@@ -8,6 +8,9 @@ using PhoneUserKICB.DAL.Repository;
 
 namespace PhoneUserKICB.BLL.Services
 {
+    /// <summary>
+    /// Service for user
+    /// </summary>
     public class UserService : IUserService
     {
         private readonly IRepository<User> _userRepository;

@@ -9,13 +9,13 @@
 
     <form asp-action="Create" method="post">
         <div class="form-group mb-4">
-            <label asp-for="PhoneNumber" class="control-label text-primary fs-4 fw-bold"></label>
+            <label asp-for="PhoneNumber" class="control-label text-primary fs-4 fw-bold">Phone number</label>
             <input asp-for="PhoneNumber" class="form-control form-control-lg" />
             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-4">
-            <label asp-for="UserId" class="control-label text-primary fs-4 fw-bold"></label>
+            <label asp-for="UserId" class="control-label text-primary fs-4 fw-bold">User</label>
             <select asp-for="UserId" class="form-control form-control-lg" asp-items="@(new SelectList(ViewBag.Users, "Id", "Name"))">
                 <option value="">Select User</option>
             </select>

@@ -5,7 +5,10 @@ using PhoneUserKICB.PL.Models.ViewModels;
 
 namespace PhoneUserKICB.PL.Controllers
 {
-    [Route("users")]
+    /// <summary>
+    /// Controller for user
+    /// </summary>
+    [Route("Users")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -44,20 +47,20 @@ namespace PhoneUserKICB.PL.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("create")]
+        [HttpGet("Create")]
         public IActionResult Create()
         {
             return View(new UserViewModel());
         }
 
-        [HttpPost("create")]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserViewModel model)
         {
             var isEmailUnique = await IsEmailUnique(model.Email);
             if (isEmailUnique is JsonResult jsonResult && jsonResult.Value is bool isUnique && !isUnique)
             {
-                ModelState.AddModelError("Email", "Пользователь с таким email уже существует.");
+                ModelState.AddModelError("Email", "User with this email already exist");
             }
             if (ModelState.IsValid)
             {
@@ -72,7 +75,7 @@ namespace PhoneUserKICB.PL.Controllers
             return View(model);
         }
 
-        [HttpGet("edit/{id}")]
+        [HttpGet("Edit/{id}")]
         public async Task<IActionResult> Edit(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -88,7 +91,7 @@ namespace PhoneUserKICB.PL.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("edit/{id}")]
+        [HttpPost("Edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserViewModel model)
         {
@@ -106,7 +109,7 @@ namespace PhoneUserKICB.PL.Controllers
             return View(model);
         }
 
-        [HttpGet("delete/{id}")]
+        [HttpGet("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -120,7 +123,7 @@ namespace PhoneUserKICB.PL.Controllers
                 DateOfBirth = user.DateOfBirth
             });
         }
-        [HttpGet("detail/{id}")]
+        [HttpGet("Detail/{id}")]
         public async Task<IActionResult> Detail(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -140,7 +143,7 @@ namespace PhoneUserKICB.PL.Controllers
             return View(userViewModel);
         }
 
-        [HttpPost("delete/{id}")]
+        [HttpPost("Delete/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -148,7 +151,7 @@ namespace PhoneUserKICB.PL.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost("check-email")]
+        [HttpPost("CheckEmail")]
         public async Task<IActionResult> IsEmailUnique(string email)
         {
             var user = await _userService.GetUserByEmailAsync(email);

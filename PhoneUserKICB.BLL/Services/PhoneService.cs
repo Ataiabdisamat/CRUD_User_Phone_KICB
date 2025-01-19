@@ -6,6 +6,9 @@ using PhoneUserKICB.DAL.Repository;
 
 namespace PhoneUserKICB.BLL.Services
 {
+    /// <summary>
+    /// Service for phone
+    /// </summary>
     public class PhoneService : IPhoneService
     {
         private readonly IRepository<Phone> _phoneRepository;
@@ -19,19 +22,6 @@ namespace PhoneUserKICB.BLL.Services
         {
             var phones = await _phoneRepository.GetAllAsync();
             return phones.Select(p => new PhoneDto
-            {
-                Id = p.Id,
-                PhoneNumber = p.PhoneNumber,
-                UserId = p.UserId
-            });
-        }
-
-        public async Task<IEnumerable<PhoneDto>> GetPhonesByUserIdAsync(int userId)
-        {
-            var phones = await _phoneRepository.GetAllAsync();
-            var userPhones = phones.Where(p => p.UserId == userId);
-
-            return userPhones.Select(p => new PhoneDto
             {
                 Id = p.Id,
                 PhoneNumber = p.PhoneNumber,
@@ -79,12 +69,11 @@ namespace PhoneUserKICB.BLL.Services
 
             await _phoneRepository.UpdateAsync(existingPhone);
         }
-
+        
         public async Task DeletePhoneAsync(int id)
         {
             var phone = await _phoneRepository.GetByIdAsync(id);
             if (phone == null) throw new ArgumentException("Phone not found");
-
             await _phoneRepository.DeleteAsync(id);
         }
     }

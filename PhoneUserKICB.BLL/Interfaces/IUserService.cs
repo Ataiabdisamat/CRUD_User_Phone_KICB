@@ -5,6 +5,9 @@ using PhoneUserKICB.DAL.Entities;
 
 namespace PhoneUserKICB.BLL.Interfaces
 {
+    /// <summary>
+    /// Inerface for user services
+    /// </summary>
     public interface IUserService
     {
         Task<IEnumerable<UserDto>> GetAllUsersAsync();

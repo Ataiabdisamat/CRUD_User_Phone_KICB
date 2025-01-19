@@ -1,6 +1,9 @@
 ﻿
 namespace PhoneUserKICB.DAL.Entities
 {
+    /// <summary>
+    /// User entity
+    /// </summary>
     public class User
     {
         public int Id { get; set; }

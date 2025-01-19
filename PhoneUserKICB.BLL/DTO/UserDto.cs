@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PhoneUserKICB.BLL.DTO
 {
+    /// <summary>
+    /// Dto for user
+    /// </summary>
     public class UserDto
     {
         public int Id { get; set; }

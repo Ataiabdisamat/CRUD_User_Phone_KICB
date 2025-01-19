@@ -5,6 +5,10 @@ using PhoneUserKICB.DAL.DataBaseContext;
 
 namespace PhoneUserKICB.DAL.Repository
 {
+    /// <summary>
+    /// Generic repository (crud)
+    /// </summary>
+    /// <typeparam name="T"> generic </typeparam>
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly AppDbContext _context;

@@ -7,6 +7,9 @@ using PhoneUserKICB.DAL.Entities;
 
 namespace PhoneUserKICB.BLL.DTO
 {
+    /// <summary>
+    /// Dto for phone 
+    /// </summary>
     public class PhoneDto
     {
         public int Id { get; set; }

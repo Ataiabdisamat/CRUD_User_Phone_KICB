@@ -13,5 +13,6 @@ namespace PhoneUserKICB.BLL.Interfaces
         Task UpdateUserAsync(UserDto user);
         Task DeleteUserAsync(int id);
         Task<User> GetUserByEmailAsync(string email);
+        Task<List<User>> GetFilteredUsersAsync(string searchTerm);
     }
 }

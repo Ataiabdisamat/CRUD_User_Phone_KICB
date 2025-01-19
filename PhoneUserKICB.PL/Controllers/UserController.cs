@@ -15,17 +15,32 @@ namespace PhoneUserKICB.PL.Controllers
             _userService = userService;
         }
 
+
         [HttpGet("")]
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string searchTerm, int page = 1)
         {
-            var users = await _userService.GetAllUsersAsync();
-            var viewModel = users.Select(user => new UserViewModel
+            int pageSize = 5;
+
+            var users = await _userService.GetFilteredUsersAsync(searchTerm);
+
+            var totalUsers = users.Count();
+            var usersPaged = users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var viewModel = new UserListViewModel
             {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                DateOfBirth = user.DateOfBirth
-            });
+                Users = usersPaged.Select(user => new UserViewModel
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email,
+                    DateOfBirth = user.DateOfBirth
+                }).ToList(),
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalUsers / (double)pageSize),
+                SearchTerm = searchTerm
+            };
+
             return View(viewModel);
         }
 

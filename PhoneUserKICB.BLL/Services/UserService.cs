@@ -81,5 +81,20 @@ namespace PhoneUserKICB.BLL.Services
         {
             await _userRepository.DeleteAsync(id);
         }
+
+        public async Task<List<User>> GetFilteredUsersAsync(string searchTerm)
+        {
+            var users = await _userRepository.GetAllAsync();  
+            var query = users.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(u => u.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                                       || u.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return query.ToList(); 
+        }
+
     }
 }

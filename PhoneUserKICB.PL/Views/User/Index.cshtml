@@ -1,9 +1,9 @@
 ﻿@using PhoneUserKICB.PL.Models.ViewModels;
 @model IEnumerable<UserViewModel>
 
-<h1>Users</h1>
-<a asp-action="Create">Add New User</a>
-<table>
+<h2>Users List</h2>
+
+<table class="table">
     <thead>
         <tr>
             <th>Name</th>
@@ -20,10 +20,13 @@
                 <td>@user.Email</td>
                 <td>@user.DateOfBirth.ToShortDateString()</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                    <a href="@Url.Action("Detail", new { id = user.Id })">Details</a> |
+                    <a href="@Url.Action("Edit", new { id = user.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", new { id = user.Id })">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<a href="@Url.Action("Create")">Create New User</a>

@@ -109,6 +109,29 @@ namespace PhoneUserKICB.PL.Controllers
             });
         }
 
+        [HttpGet("detail/{id}")]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var phone = await _phoneService.GetPhoneByIdAsync(id);
+            if (phone == null)
+            {
+                return NotFound();
+            }
+
+            var phoneViewModel = new PhoneViewModel
+            {
+                Id = phone.Id,
+                PhoneNumber = phone.PhoneNumber,
+                UserId = phone.UserId
+            };
+
+            // Можно добавить информацию о пользователе, если нужно
+            var user = await _userService.GetUserByIdAsync(phone.UserId);
+            ViewBag.UserName = user?.Name;
+
+            return View(phoneViewModel);
+        }
+
         [HttpPost("delete/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -1,0 +1,10 @@
+﻿@model PhoneUserKICB.PL.Models.ViewModels.PhoneViewModel
+
+<h2>Phone Details</h2>
+
+<div>
+    <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+    <p><strong>Associated User:</strong> @ViewBag.UserName</p>
+</div>
+
+<a href="@Url.Action("Index")">Back to list</a>

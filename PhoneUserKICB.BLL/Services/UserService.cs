@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using PhoneUserKICB.BLL.DTO;
 using PhoneUserKICB.BLL.Interfaces;
 using PhoneUserKICB.BLL.Validations;
@@ -71,7 +72,11 @@ namespace PhoneUserKICB.BLL.Services
 
             await _userRepository.UpdateAsync(existingUser);
         }
-
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            var users = await _userRepository.GetAllAsync();
+            return users.FirstOrDefault(u => u.Email == email);
+        }
         public async Task DeleteUserAsync(int id)
         {
             await _userRepository.DeleteAsync(id);

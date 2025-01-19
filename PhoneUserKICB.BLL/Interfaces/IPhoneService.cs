@@ -1,6 +1,7 @@
 ﻿
 
 using PhoneUserKICB.BLL.DTO;
+using PhoneUserKICB.DAL.Entities;
 
 namespace PhoneUserKICB.BLL.Interfaces
 {
@@ -12,5 +13,8 @@ namespace PhoneUserKICB.BLL.Interfaces
         Task CreatePhoneAsync(PhoneDto phone);
         Task UpdatePhoneAsync(PhoneDto phone);
         Task DeletePhoneAsync(int id);
+
+        
+
     }
 }

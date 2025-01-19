@@ -17,5 +17,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(100);
         builder.Property(u => u.DateOfBirth)
             .IsRequired();
+        builder.HasIndex(u => u.Email)
+           .IsUnique();
     }
 }

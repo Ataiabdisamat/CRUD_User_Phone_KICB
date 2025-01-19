@@ -15,7 +15,7 @@ namespace PhoneUserKICB.PL.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("")]
         public async Task<IActionResult> Index()
         {
             var users = await _userService.GetAllUsersAsync();
@@ -39,6 +39,11 @@ namespace PhoneUserKICB.PL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserViewModel model)
         {
+            var isEmailUnique = await IsEmailUnique(model.Email);
+            if (isEmailUnique is JsonResult jsonResult && jsonResult.Value is bool isUnique && !isUnique)
+            {
+                ModelState.AddModelError("Email", "Пользователь с таким email уже существует.");
+            }
             if (ModelState.IsValid)
             {
                 await _userService.CreateUserAsync(new UserDto
@@ -100,6 +105,25 @@ namespace PhoneUserKICB.PL.Controllers
                 DateOfBirth = user.DateOfBirth
             });
         }
+        [HttpGet("detail/{id}")]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userViewModel = new UserViewModel
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                DateOfBirth = user.DateOfBirth
+            };
+
+            return View(userViewModel);
+        }
 
         [HttpPost("delete/{id}")]
         [ValidateAntiForgeryToken]
@@ -107,6 +131,17 @@ namespace PhoneUserKICB.PL.Controllers
         {
             await _userService.DeleteUserAsync(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost("check-email")]
+        public async Task<IActionResult> IsEmailUnique(string email)
+        {
+            var user = await _userService.GetUserByEmailAsync(email);
+            if (user != null)
+            {
+                return Json(false); 
+            }
+            return Json(true); 
         }
     }
 }

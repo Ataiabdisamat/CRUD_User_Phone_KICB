@@ -1,6 +1,7 @@
 ﻿
 
 using PhoneUserKICB.BLL.DTO;
+using PhoneUserKICB.DAL.Entities;
 
 namespace PhoneUserKICB.BLL.Interfaces
 {
@@ -11,5 +12,6 @@ namespace PhoneUserKICB.BLL.Interfaces
         Task CreateUserAsync(UserDto user);
         Task UpdateUserAsync(UserDto user);
         Task DeleteUserAsync(int id);
+        Task<User> GetUserByEmailAsync(string email);
     }
 }

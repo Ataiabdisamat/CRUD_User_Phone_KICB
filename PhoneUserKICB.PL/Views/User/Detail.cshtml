@@ -1,0 +1,9 @@
+﻿@model PhoneUserKICB.PL.Models.ViewModels.UserViewModel
+
+<h2>User Details</h2>
+
+<p><strong>Name:</strong> @Model.Name</p>
+<p><strong>Email:</strong> @Model.Email</p>
+<p><strong>Date of Birth:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+
+<a href="@Url.Action("Index")">Back to list</a>
